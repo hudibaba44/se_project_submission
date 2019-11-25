@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  drone:
+    image: drone/drone:1.1.0
+    container_name: drone
+    environment:
+      - DRONE_GITEA_SERVER=http://192.168.43.129:3000/
+      - DRONE_GITEA_CLIENT_ID=330d4b3e-63ef-4dde-922b-fa980596070f
+      - DRONE_GITEA_CLIENT_SECRET=94hJZ7GvV7lAz-6SG5EXFo9HTcQtQvnXepFtwNuTVpI=
+      - DRONE_GIT_ALWAYS_AUTH=false
+      - DRONE_RUNNER_CAPACITY=2
+      - DRONE_SERVER_PROTO=http
+      - DRONE_SERVER_HOST=192.168.43.47
+      - DRONE_TLS_AUTOCERT=false
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./perm/drone/data:/data
+    restart: always
+
